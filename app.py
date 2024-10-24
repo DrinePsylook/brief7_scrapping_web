@@ -48,26 +48,21 @@ def table_pib():
     tableaux = soup.find_all('table')
     tbl2 = tableaux[2]
     ligne = tbl2.findAll('tr')
-    
+    quote= []
     for row in ligne:
-        quote= []
         pays = row.findAll('a')
         td_elements = row.findAll('td')
 
         try:
-            if len(td_elements) > 1:
-                quote.append(td_elements[0].get_text().strip()) 
-                quote.append(td_elements[2].get_text().strip())
-            if len(pays) > 1:
-                quote.append(pays[1]['title'])
-            
+            if len(td_elements) > 1 :
+                quote.append([td_elements[0].get_text().strip(), td_elements[2].get_text().strip(), pays[1]['title']]) 
         except TypeError:
             continue
         print(quote)
 
-    create_table_pib()
+    # create_table_pib()
     insert_table_pib(quote)
-    
+
     return quote
 
 
