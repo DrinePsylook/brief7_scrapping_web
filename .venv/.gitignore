@@ -1,0 +1,25 @@
+.venv/
+bin/
+lib/
+lib64/
+venv/
+
+# Ignorer les fichiers compilés Python
+*.pyc
+__pycache__/
+
+# Ignorer les dossiers spécifiques à Flask et Python
+instance/
+
+# Ignorer les caches de tests et de couverture
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignorer les dossiers de distribution
+dist/
+build/
+*.egg-info/
+
+# Ignorer les fichiers spécifiques aux systèmes Windows
+*.zone.identifier
