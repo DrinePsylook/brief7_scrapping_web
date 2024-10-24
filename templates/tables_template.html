@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de données BDD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class = "bouton"><a href="/">Accueil</a></li>
+                <li class = "bouton"><a href="/table/customer">Client</a></li>
+                <li class = "bouton"><a href="/table/product">Produit</a></li>
+                <li class = "bouton"><a href="/table/customer_order">Commandes des clients</a></li>
+                <li class = "bouton"><a href="/table/order_detail">Détail des commandes</a></li>
+                <li><a href="/table/all">Tous</a></li>
+                <li><a href="/tablePib">Tableau du PIB </a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <h1>Table des {{name}} </h1>
+
+    <div class = "tabdiv">
+        <table>
+        
+            <caption>Table : {{name}}</caption>
+    
+            <thead>
+                <tr>
+                {%for row in col%}
+                    <th>{{row}}</th>
+                {%endfor%}
+                </tr>
+            </thead>
+        
+            <tbody>
+                {%for i in tables%}
+                    <tr>
+                    {%for j in i%}
+                        <td>{{j}}</td>
+                    {%endfor%}
+                    </tr>
+                {%endfor%}
+            </tbody>
+        
+        </table>
+    </div>
+
+</body>
+</html>
+
