@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de données BDD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="menuNav">
+                <li id = "bouton"><a class="link" href="/">Accueil</a></li>
+                <li id = "bouton" class="{% if name == 'customer' %}active{% endif %}"><a class="link"  href="/table/customer">Client</a></li>
+                <li id = "bouton" class="{% if name == 'product' %}active{% endif %}"><a class="link" href="/table/product">Produit</a></li>
+                <li id = "bouton" class="{% if name == 'customer_order' %}active{% endif %}" ><a class="link" href="/table/customer_order">Commandes des clients</a></li>
+                <li id = "bouton"><a class="link" href="/table/order_detail">Détail des commandes</a></li>
+                <li id = "bouton" class="{% if name == 'all' %}active{% endif %}" ><a class="link" href="/table/all">Tous</a></li>
+                <li id = "bouton" class="{% if name == 'pib' %}active{% endif %}" ><a class="link" href="/tablePib">Tableau du PIB </a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <h1>Table des {{name}} </h1>
+
+    <div class = "tabdiv">
+        <table>
+        
+            <caption>Table : {{name}}</caption>
+    
+            <thead>
+                <tr>
+                {%for row in quote%}
+                    <th>{{row}}</th>
+                {%endfor%}
+                </tr>
+            </thead>
+        
+            <tbody>
+                {%for i in tables%}
+                    <tr>
+                        <td>{{print(i)}}</td>
+                        <td>{{i['pib']}}</td>
+                        <td>{{i['country']}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        
+        </table>
+    </div>
+
+</body>
+</html>
+

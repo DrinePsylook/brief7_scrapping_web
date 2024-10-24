@@ -1,6 +1,8 @@
 # imports flask
 from flask import Flask, render_template
 import sqlite3
+
+from flaskr.db import create_table_pib, insert_table_pib
 app = Flask(__name__)
 
 # imports beautifulsoup
@@ -43,30 +45,30 @@ def table_pib():
     url = "https://fr.wikipedia.org/wiki/Liste_des_pays_par_PIB_(PPA)_par_habitant"
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html5lib')
-    table = soup.find('table', attrs= {'class' : 'wikitable alternance'})
     tableaux = soup.find_all('table')
     tbl2 = tableaux[2]
     ligne = tbl2.findAll('tr')
     
     for row in ligne:
-        quote= {}
-
+        quote= []
         pays = row.findAll('a')
-        # print(f" *** Pays si joli *** = {pays}")
-        # print(len(pays))
-
         td_elements = row.findAll('td')
-        # print(td_elements)
 
         try:
             if len(td_elements) > 1:
-                quote['rang'] = td_elements[0].get_text().strip()
-                quote['pib'] = td_elements[2].get_text().strip()
+                quote.append(td_elements[0].get_text().strip()) 
+                quote.append(td_elements[2].get_text().strip())
             if len(pays) > 1:
-                quote['country'] = pays[1]['title']
+                quote.append(pays[1]['title'])
             
-            print(quote)
         except TypeError:
             continue
+        print(quote)
 
-    return tbl2.prettify()
+    create_table_pib()
+    insert_table_pib(quote)
+    
+    return quote
+
+
+    
